@@ -1,13 +1,13 @@
 import React, { FC } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../store";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../store";
 import { addProduct } from "./productSlice";
 
 interface ProductsListProps {}
 
 const ProductsList: FC<ProductsListProps> = (props) => {
   const products = useSelector((state: RootState) => state.products);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   return (
     <div>
       <h3>Products</h3>
