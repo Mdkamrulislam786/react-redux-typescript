@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from "react";
 import { useAppDispatch } from "../store";
-import { addProduct, Product } from "./productSlice";
+import { addProduct, Product } from "./product.slice";
 
 const ProductForm: FC = () => {
   const dispatch = useAppDispatch();

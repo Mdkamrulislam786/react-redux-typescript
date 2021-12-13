@@ -1,13 +1,17 @@
 import React, { FC } from "react";
 import { useSelector } from "react-redux";
+import { addToCart } from "../Cart/cart.slice";
 import { RootState, useAppDispatch } from "../store";
-import { addProduct } from "./productSlice";
+import { Product, removeProduct } from "./product.slice";
 
 interface ProductsListProps {}
 
 const ProductsList: FC<ProductsListProps> = (props) => {
   const products = useSelector((state: RootState) => state.products);
   const dispatch = useAppDispatch();
+  const removeFromStore = (id: number) => dispatch(removeProduct(id));
+  const addToCartandler = (product: Product) => dispatch(addToCart(product));
+
   return (
     <div>
       <h3>Products</h3>
@@ -16,13 +20,10 @@ const ProductsList: FC<ProductsListProps> = (props) => {
           <span>
             {product.title}: {product.price}
           </span>
+          <button onClick={() => addToCartandler(product)}>Add to cart</button>
+          <button onClick={() => removeFromStore(product.id)}>remove</button>
         </div>
       ))}
-      <button
-        onClick={() => dispatch(addProduct({ id: 1, title: "new", price: 8 }))}
-      >
-        Add
-      </button>
     </div>
   );
 };

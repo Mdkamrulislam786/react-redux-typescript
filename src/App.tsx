@@ -1,4 +1,5 @@
 import React from "react";
+import Cart from "./Cart/Cart";
 import ProductForm from "./Products/ProductForm";
 import ProductsList from "./Products/ProductsList";
 
@@ -7,6 +8,7 @@ function App() {
     <div className="App">
       <ProductsList />
       <ProductForm />
+      <Cart />
     </div>
   );
 }
