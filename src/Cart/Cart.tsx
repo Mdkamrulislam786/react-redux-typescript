@@ -7,7 +7,7 @@ const Cart: FC = () => {
   const dispatch = useAppDispatch();
   const cartProducts = useSelector((state: RootState) => state.cart);
   const totalPrice = useSelector(getTotalPrice);
-  const handleRemoveFromCart = (id: number) => dispatch(removeFromCart(id));
+  const handleRemoveFromCart = (id: string) => dispatch(removeFromCart(id));
 
   return (
     <div>

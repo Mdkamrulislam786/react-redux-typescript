@@ -7,9 +7,9 @@ import { Product, removeProduct } from "./product.slice";
 interface ProductsListProps {}
 
 const ProductsList: FC<ProductsListProps> = (props) => {
-  const products = useSelector((state: RootState) => state.products);
+  const products = useSelector((state: RootState) => state.products.products);
   const dispatch = useAppDispatch();
-  const removeFromStore = (id: number) => dispatch(removeProduct(id));
+  const removeFromStore = (id: string) => dispatch(removeProduct(id));
   const addToCartandler = (product: Product) => dispatch(addToCart(product));
 
   return (

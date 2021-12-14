@@ -1,13 +1,18 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from "react";
-import { useAppDispatch } from "../store";
-import { addProduct, Product } from "./product.slice";
+import { useSelector } from "react-redux";
+import { RootState, useAppDispatch } from "../store";
+import { addProductAsync, Product } from "./product.slice";
 
 const ProductForm: FC = () => {
   const dispatch = useAppDispatch();
+  const errorMessage = useSelector(
+    (state: RootState) => state.products.errorMessage
+  );
+
   const [product, setProduct] = useState<Product>({
-    id: 0,
+    id: "",
     title: "",
-    price: 0,
+    price: "",
   });
   const { id, title, price } = product;
 
@@ -22,8 +27,12 @@ const ProductForm: FC = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addProduct(product));
-    console.log(product);
+    dispatch(addProductAsync(product));
+    setProduct({
+      id: "",
+      title: "",
+      price: "",
+    });
   };
 
   return (
@@ -51,7 +60,13 @@ const ProductForm: FC = () => {
           value={id}
           onChange={handleChange}
         />
-        <button type="submit">Add</button>
+        <button
+          style={{ background: errorMessage ? "red" : "#eee" }}
+          type="submit"
+        >
+          Add
+        </button>
+        <p style={{ color: "red" }}>{errorMessage ? errorMessage : ""}</p>
       </form>
     </>
   );
